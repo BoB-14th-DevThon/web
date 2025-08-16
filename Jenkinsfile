@@ -19,25 +19,16 @@ pipeline {
 
         stage('Checkout') {
             steps {
-                git branch: 'main', credentialsId: 'github_token', url: 'https://github.com/DongUgaUga/winection-web.git'
-            }
-        }
-
-        stage('Setup') {
-            steps {
-                script {
-                    sh '''
-                    chmod 600 .env
-                    '''
-                }
+                checkout scm
             }
         }
 
         stage('Deploy') {
             steps {
                 script {
-                    sh "docker-compose down"
-                    sh "docker-compose up -d --build web"
+                    sh '''
+                    docker build -t woo_frontend:latest .
+                    '''
                 }
             }
         }
