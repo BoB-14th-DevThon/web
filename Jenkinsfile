@@ -2,8 +2,7 @@ pipeline {
     agent any
 
     environment {
-        VITE_SERVER_URL = credentials('vite_server_url')
-        DISCORD = credentials('discord_webhook')
+        DISCORD = credentials('DISCORD_WEBHOOK')
     }
 
     stages {
@@ -28,7 +27,6 @@ pipeline {
             steps {
                 script {
                     sh '''
-                    echo "VITE_SERVER_URL=$VITE_SERVER_URL" > .env
                     chmod 600 .env
                     '''
                 }
